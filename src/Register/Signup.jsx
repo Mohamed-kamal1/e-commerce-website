@@ -1,6 +1,6 @@
 import {Form, Input} from "../components/Form.jsx";
 import {Button} from "../components/Button.jsx";
-import {Outlet, useNavigate} from "react-router-dom";
+import {Link, Outlet, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {colors} from "../style.js";
 
@@ -22,7 +22,7 @@ export function Signup() {
             users.push({email: email, password: password, name: name});
             localStorage.setItem('users', JSON.stringify(users));
             alert("Signup successful");
-            navigate('/e-commerce-website/login');
+            navigate('/login');
         }
     }
 
@@ -94,7 +94,7 @@ export function Signup() {
                                 Sign up with Google
                             </Button>
                             <p className="self-center">Already have an account?
-                                <a href="/e-commerce-website/login" className="underline ml-3">Login</a>
+                                <Link to="/login" className="underline ml-3">Login</Link>
                             </p>
                         </Form>
                     </div>

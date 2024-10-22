@@ -15,7 +15,7 @@ export function Error() {
                         color={colors.text}
                         width={"250px"}
                         className={"mt-10"}
-                        onClick={()=> navigate("/e-commerce-website/Home")}
+                        onClick={()=> navigate("/Home")}
                     >
                         Back to home page
                     </Button>

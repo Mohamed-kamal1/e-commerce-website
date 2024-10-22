@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {colors} from "../style.js";
 import {Button} from "../components/Button.jsx";
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 export function Checkout() {
     const [subtotal, setSubtotal] = useState(0);
 
@@ -17,9 +18,9 @@ export function Checkout() {
         <>
             <div className={"flex flex-col lg:mx-auto mx-4 lg:w-11/12  gap-10 my-14"}>
                 <div className={"flex gap-2 text-neutral-500"}>
-                    <a className="cursor-pointer" href="/e-commerce-website/Home">Home</a>
+                    <Link className="cursor-pointer" to="/Home">Home</Link>
                     /
-                    <a className="cursor-pointer" href="/e-commerce-website/cart">Cart</a>
+                    <Link className="cursor-pointer" to="/cart">Cart</Link>
                     /
                     <a className="text-black">Checkout</a>
                 </div>

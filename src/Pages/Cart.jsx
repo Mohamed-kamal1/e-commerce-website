@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 import {Button} from "../components/Button.jsx";
 import {colors} from "../style.js";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 export function Cart() {
     const [subtotal, setSubtotal] = useState(0);
@@ -25,7 +25,7 @@ export function Cart() {
         <>
             <div className={"flex flex-col lg:mx-auto mx-4 lg:w-11/12  gap-10 my-14"}>
                 <div className={"flex gap-2 text-neutral-500"}>
-                        <a className="cursor-pointer" href="/e-commerce-website/Home">Home</a>
+                        <Link className="cursor-pointer" to="/Home">Home</Link>
                         /
                         <a className="text-black">Cart</a>
                 </div>
@@ -97,7 +97,7 @@ export function Cart() {
                                 hoverColor={colors.button2Hover}
                                 color={colors.text}
                                 width={"200px"}
-                                onClick={() => {navigate("/e-commerce-website/Checkout");}}
+                                onClick={() => {navigate("/Checkout");}}
                             >Proceed To Checkout</Button>
                         </div>
 

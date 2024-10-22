@@ -44,7 +44,6 @@ function Home() {
     }, []);
 
     const products = productsArray.concat(Products);
-    console.log(products);
     const categories = Categories
     const TodayRef = useRef(null);
     const CategoriesRef = useRef(null);

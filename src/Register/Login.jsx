@@ -20,7 +20,7 @@ export function Login() {
             localStorage.setItem('user', JSON.stringify(user));
             localStorage.setItem('login', JSON.parse(true));
             localStorage.setItem('cartItems', JSON.stringify([]));
-            navigate('/e-commerce-website/Home');
+            navigate('/Home');
             window.location.reload();
         } else {
             alert("Invalid email or password");
@@ -71,7 +71,7 @@ export function Login() {
                                 </Button>
                                 <a
                                     style={{color: "var(--button2)"}}
-                                    href="#" className=""
+                                    className=""
                                 >Forgot password?</a>
                             </div>
                         </Form>

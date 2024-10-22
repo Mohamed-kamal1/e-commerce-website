@@ -51,8 +51,9 @@ function Slider() {
             setCurrentIndex(index);
         };
 
-        sliderRef.current.addEventListener('scroll', handleScroll);
-        return () => sliderRef.current.removeEventListener('scroll', handleScroll);
+        const element = sliderRef.current;
+        element.addEventListener('scroll', handleScroll);
+        return () => element.removeEventListener('scroll', handleScroll);
     }, []);
 
     // Scroll to the selected slide when the index changes

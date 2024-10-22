@@ -2,9 +2,9 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import {colors} from "../style.js";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 const navigation = [
-    { name: 'Home', href: '/e-commerce-website/Home', current: true },
+    { name: 'Home', href: 'Home', current: true },
     { name: 'About', href: '#', current: false },
     { name: 'Contact', href: '#', current: false },
 ]
@@ -21,7 +21,7 @@ export function Header() {
     useEffect(
         () => {
             setCartItems(JSON.parse(localStorage.getItem("cartItems")) || []);
-        });
+        },[cartItems]);
     useEffect(
         () => {
 
@@ -33,7 +33,7 @@ export function Header() {
         setLogin('false');
         localStorage.removeItem('login');
         localStorage.removeItem('cartItems');
-        navigate('/e-commerce-website/login');
+        navigate('/login');
         window.location.reload();
     }
     return (
@@ -61,9 +61,9 @@ export function Header() {
                             <div className="hidden lg:block">
                                 <div className="flex space-x-2 xl:space-x-4">
                                     {navigation.map((item) => (
-                                        <a
+                                        <Link
+                                            to={item.href}
                                             key={item.name}
-                                            href={item.href}
                                             aria-current={item.current ? 'page' : undefined}
                                             className={classNames(
                                                 'xl:text-lg text-sm px-2 py-2 font-medium',
@@ -71,7 +71,7 @@ export function Header() {
                                             )}
                                         >
                                             {item.name}
-                                        </a>
+                                        </Link>
                                     ))}
                                 </div>
                             </div>
@@ -99,9 +99,9 @@ export function Header() {
                                         <div>
                                             <img alt="" src={"./assets/heart.png"} className="xl:h-7 xl:w-7 h-5 w-5"/>
                                         </div>
-                                        <a
+                                        <Link
+                                            to="/cart"
                                             className="cursor-pointer relative"
-                                            href="/e-commerce-website/cart"
                                         >
                                             {cartCount > 0 &&
                                             <div
@@ -113,7 +113,8 @@ export function Header() {
                                             }
                                             <img alt="" src={"./assets/shopping-cart.png"}
                                                  className="xl:h-7 xl:w-7 h-5 w-5"/>
-                                        </a>
+
+                                        </Link>
                                         <div
                                             className="p-1 rounded-full bg-white hover:invert"
                                         >
@@ -133,38 +134,39 @@ export function Header() {
                                             className="absolute top-0 right-0 z-10 mt-8 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                                         >
                                             <MenuItem>
-                                                <a href="#"
+                                                <a
                                                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                                                     Your Profile
                                                 </a>
                                             </MenuItem>
                                             <MenuItem>
-                                                <a href="#"
+                                                <a
                                                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                                                     Settings
                                                 </a>
                                             </MenuItem>
                                             <MenuItem>
-                                                <a
+                                                <Link
+                                                    to="/login"
                                                    onClick={signOut}
                                                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                                                     Sign out
-                                                </a>
+                                                </Link>
                                             </MenuItem>
                                         </MenuItems>
 
                                     </Menu>
                                     :
-                                    <a
+                                    <Link
                                         key= "SignUp"
-                                        href="/e-commerce-website/signup"
+                                        to="/"
                                         className={classNames(
                                             'xl:text-lg text-sm px-2 py-2 font-medium',
                                             'text-gray-500 hover:underline hover:text-black',
                                         )}
                                     >
                                         Sign Up
-                                    </a>
+                                    </Link>
                             }
 
 
