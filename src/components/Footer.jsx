@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
+import {Section} from "./Section.jsx";
 
-export function Footer() {
+function Footer() {
     return (
         <>
             <footer
@@ -49,6 +50,37 @@ export function Footer() {
     )
 }
 
+function Footer2() {
+    function Icon(props){
+        return (
+            <div className={"flex flex-col items-center justify-center gap-2"}>
+                <div className={"p-2 bg-neutral-400 rounded-full w-16 h-16 mb-4"}>
+                    <img className={"bg-black rounded-full p-2"} src={props.src} alt={""}/>
+                </div>
+                <h1 className={"text-center text-xl font-semibold"}>{props.title}</h1>
+                <h1 className={"text-center text-sm"}>{props.title2}</h1>
+            </div>
+        )
+    }
+    Icon.propTypes = {
+        src: PropTypes.string,
+        title: PropTypes.string,
+        title2: PropTypes.string
+    }
+
+    return (
+        <>
+            <Section>
+                <div className="flex md:flex-row flex-col gap-10 justify-around lg:mx-10 mb-20">
+                    <Icon src={"assets/delivery.png"} title={"FREE AND FAST DELIVERY"} title2={"Free delivery for all orders over $140"}/>
+                    <Icon src={"assets/customer-service.png"} title={"24/7 CUSTOMER SERVICE"} title2={"Friendly 24/7 customer support"}/>
+                    <Icon src={"assets/secure.png"} title={"MONEY BACK GUARANTEE"} title2={"We reurn money within 30 days"}/>
+                </div>
+            </Section>
+
+        </>
+    )
+}
 
 function Icon({src}) {
     return (
@@ -59,6 +91,7 @@ function Icon({src}) {
         />
     )
 }
+
 function Link({children}) {
     return (
         <a
@@ -69,6 +102,7 @@ function Link({children}) {
         </a>
     )
 }
+
 function Links({children}) {
     return (
         <div className="flex flex-col gap-5">
@@ -83,6 +117,9 @@ function LinksHead({children}) {
         </h1>
     )
 }
+
+
+
 Icon.propTypes = {src: PropTypes.string}
 Link.propTypes = {
     src: PropTypes.string,
@@ -90,3 +127,6 @@ Link.propTypes = {
 }
 Links.propTypes = {children: PropTypes.array}
 LinksHead.propTypes = {children: PropTypes.string}
+
+
+export {Footer, Footer2};

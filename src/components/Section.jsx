@@ -2,27 +2,25 @@ import PropTypes from "prop-types";
 import {colors} from "../style.js";
 import {Button} from "./Button.jsx";
 import {useState} from "react";
+import {Scroll} from "./Slider.jsx";
 function Section(props) {
     return (
         <>
-            <section className="flex flex-col mx-auto my-2 lg:w-11/12 md:w-full md:gap-20 gap-10 mt-40">
+            <section className={"flex flex-col mx-auto my-2 lg:w-11/12 md:w-full md:gap-20 gap-10 mt-40"}>
                 {props.children}
             </section>
         </>
     )
 }
 function CardsContainer(props) {
-
     return (
-        <div ref={props.Ref} className="flex overflow-x-hidden snap-x snap-mandatory">
+        <div ref={props.Ref} className={props.className+" flex overflow-x-hidden snap-x snap-mandatory"}>
             {props.children}
         </div>
     );
 }
 
-
 function SectionHeader(props) {
-
     return (
         <>
             <div className="flex md:flex-row flex-col gap-6 justify-between px-5">
@@ -58,27 +56,25 @@ function SectionHeader(props) {
     )
 }
 
+function SectionFooter() {
+    return (
+        <>
+            <div className="flex justify-center">
+                <Button className={"py-4"} width={"260px"}  BackgroundColor={colors.button2} color={colors.text}>View All Products</Button>
+            </div>
+        </>
+    )
+}
+
+const baseStyle = {
+    backgroundColor: colors.secondary,
+};
+
+const hoverStyle = {
+    backgroundColor: colors.secondary2,
+};
 function Arrow({ direction,Ref }) {
-    const width = (Ref.current) ? Ref.current.firstChild.offsetWidth: 0;
-    function Scroll() {
-        console.log(Ref.current.firstChild.offsetWidth);
-        if (direction === 'left') {
-            Ref.current.scrollBy({ left: -width, behavior: 'smooth' });
-        } else {
-            Ref.current.scrollBy({ left: width, behavior: 'smooth' });
-        }
-    }
-
     const [hover, setHover] = useState(false);
-
-    const baseStyle = {
-        backgroundColor: colors.secondary,
-    };
-
-    const hoverStyle = {
-        backgroundColor: colors.secondary2,
-    };
-
     return (
         <img
             style={hover ? { ...baseStyle, ...hoverStyle } : baseStyle}
@@ -86,7 +82,7 @@ function Arrow({ direction,Ref }) {
             src={direction === "left" ?"assets/left-arrow.png":"assets/right-arrow.png" } alt=""
             onMouseOver={() => setHover(true)}
             onMouseOut={() => setHover(false)}
-            onClick={Scroll}
+            onClick={()=>Scroll(direction,Ref)}
         />
     );
 }
@@ -109,5 +105,6 @@ SectionHeader.propTypes = {
 CardsContainer.propTypes = {
     children: PropTypes.node,
     Ref: PropTypes.object,
+    className: PropTypes.string,
 };
-export {Section, SectionHeader , CardsContainer};
+export {Section, SectionHeader , SectionFooter,CardsContainer, Arrow};

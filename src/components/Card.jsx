@@ -18,19 +18,19 @@ function CardImage(props) {
                 className="flex justify-center items-center xl:p-16 lg:p-10 p-8 relative overflow-y-hidden group h-4/6 aspect-square"
             >
                 <img
-                    className="object-cover group-hover:scale-110 transition-all duration-300"
+                    className=" object-cover group-hover:scale-110 transition-all duration-300"
                     src={props.src}
                     alt=""
                 />
                 <div
-                    className="absolute w-full bg-black bg-opacity-50 flex justify-center items-center
+                    className="absolute w-full bg-black bg-opacity-50 flex justify-center items-center cursor-pointer
                     h-fit py-2 -bottom-1/4 group-hover:bottom-0 transition-all duration-300 text-white"
+                    onClick={props.onClick}
                 >Add To Cart</div>
             </div>
         </>
     );
 }
-
 function CardDetails(props) {
     return (
         <>
@@ -88,6 +88,7 @@ Card.propTypes = {
 };
 CardImage.propTypes = {
     src: PropTypes.string,
+    onClick: PropTypes.func,
 };
 CardDetails.propTypes = {
     children: PropTypes.node,

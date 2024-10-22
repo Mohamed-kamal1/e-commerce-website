@@ -1,0 +1,110 @@
+{
+  "Products": [
+    {
+      "name": "HAVIT HV-G92 Gamepad",
+      "price": 120,
+      "oldPrice": 160,
+      "stars": 4,
+      "rate": 200,
+      "image": "assets/image1.png"
+    },
+    {
+      "name": "AK-900 Wired Keyboard",
+      "price": 20,
+      "oldPrice": 25,
+      "stars": 3,
+      "rate": 100,
+      "image": "assets/image2.png"
+    },
+    {
+      "name": "IPS LCD Gaming Monitor",
+      "price": 300,
+      "oldPrice": 350,
+      "stars": 5,
+      "rate": 500,
+      "image": "assets/image3.png"
+    },
+    {
+      "name": "S-Series Comfort Chair",
+      "price": 400,
+      "oldPrice": 450,
+      "stars": 2,
+      "rate": 50,
+      "image": "assets/image4.png"
+    },
+    {
+      "name": "Apple iPhone 16 Plus",
+      "price": 899,
+      "oldPrice": 900,
+      "stars": 5,
+      "rate": 100,
+      "image": "assets/iphone16.png"
+    },
+    {
+      "name": "Apple iPhone 16 Pro max",
+      "price": 1199,
+      "oldPrice": "",
+      "stars": 5,
+      "rate": 120,
+      "image": "assets/iphone16pro.png"
+    },
+    {
+      "name": "Apple Watch Ultra 2",
+      "price": 799,
+      "oldPrice": "",
+      "stars": 4,
+      "rate": 67,
+      "image": "assets/watch-ultra2.png"
+    },
+    {
+      "name": "Apple Watch 10",
+      "price": 499,
+      "oldPrice": 459,
+      "stars": 3,
+      "rate": 30,
+      "image": "assets/watch1.png"
+    },
+    {
+      "name": "Apple Air Pods 4",
+      "price": 179,
+      "oldPrice": "",
+      "stars": 4,
+      "rate": 50,
+      "image": "assets/airPods4.png"
+    }
+  ],
+  "Categories": [
+    {
+      "title": "Smartphones",
+      "image": "assets/smartphone.png"
+    },
+    {
+      "title": "Laptops",
+      "image": "assets/laptop.png"
+    },
+    {
+      "title": "Headphones",
+      "image": "assets/headphones.png"
+    },
+    {
+      "title": "Smartwatches",
+      "image": "assets/smartwatch.png"
+    },
+    {
+      "title": "Electronics",
+      "image": "assets/console.png"
+    },
+    {
+      "title": "Furniture",
+      "image": "assets/armchair.png"
+    },
+    {
+      "title": "Books",
+      "image": "assets/books.png"
+    },
+    {
+      "title": "Stationery",
+      "image": "assets/stationery.png"
+    }
+  ]
+}

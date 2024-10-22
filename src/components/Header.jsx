@@ -1,11 +1,12 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import {colors} from "../style.js";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 const navigation = [
-    { name: 'Home', href: '#', current: true },
+    { name: 'Home', href: '/e-commerce-website/Home', current: true },
     { name: 'About', href: '#', current: false },
     { name: 'Contact', href: '#', current: false },
-    { name: 'Sign Up', href: '#', current: false },
 ]
 
 function classNames(...classes) {
@@ -13,6 +14,28 @@ function classNames(...classes) {
 }
 
 export function Header() {
+    const navigate = useNavigate();
+    const [isLogin,setLogin] = useState(localStorage.getItem('login'));
+    const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cartItems")) || []);
+    const [cartCount, setCartCount] = useState(cartItems.length);
+    useEffect(
+        () => {
+            setCartItems(JSON.parse(localStorage.getItem("cartItems")) || []);
+        });
+    useEffect(
+        () => {
+
+            setCartCount(cartItems.length);
+        },[cartItems]
+    );
+
+    function signOut() {
+        setLogin('false');
+        localStorage.removeItem('login');
+        localStorage.removeItem('cartItems');
+        navigate('/e-commerce-website/login');
+        window.location.reload();
+    }
     return (
         <>
             <Disclosure as="nav" className="">
@@ -57,64 +80,94 @@ export function Header() {
                             className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
                             {/* Profile dropdown */}
-                            <Menu as="div" className="hidden lg:flex relative ml-3 gap-4 items-center ">
-                                {/*search*/}
-                                <div className="flex p-0.5 bg-gray-100">
-                                    <input
-                                        type="text"
-                                        placeholder="Search"
-                                        className=" py-1 px-2 bg-gray-100 text-sm xl:text-lg"
-                                    />
-                                    <button className=" py-1 px-2 ">
-                                        <img alt="" src={"./assets/search.png"} className="xl:h-7 xl:w-7 h-5 w-5"/>
-                                    </button>
-                                </div>
-                                <div>
-                                    <img alt="" src={"./assets/heart.png"} className="xl:h-7 xl:w-7 h-5 w-5"/>
-                                </div>
-                                <div>
-                                    <img alt="" src={"./assets/shopping-cart.png"} className="xl:h-7 xl:w-7 h-5 w-5"/>
-                                </div>
-                                <div
-                                    className="p-1 rounded-full"
-                                    style={{backgroundColor: colors.secondary2}}
-                                >
-                                    <MenuButton
-                                        style={{backgroundColor: colors.secondary2}}
-                                        className="relative flex rounded-full">
-                                        <span className="absolute -inset-1.5"/>
-                                        <span className="sr-only">Open user menu</span>
-                                        <img
-                                            alt=""
-                                            src={"./assets/user.png"}
-                                            className="xl:h-6 xl:w-6 h-5 w-5 rounded-full invert"
-                                        />
-                                    </MenuButton>
-                                </div>
-                                <MenuItems
-                                    transition
-                                    className="absolute top-0 right-0 z-10 mt-8 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-                                >
-                                    <MenuItem>
-                                        <a href="#"
-                                           className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
-                                            Your Profile
+                            {
+                                isLogin ?
+                                    <Menu as="div" className="hidden lg:flex relative ml-3 gap-4 items-center ">
+                                        {/*search*/}
+
+                                        <div className="flex p-0.5 bg-gray-100">
+                                            <input
+                                                type="text"
+                                                placeholder="Search"
+                                                className=" py-1 px-2 bg-gray-100 text-sm xl:text-lg"
+                                            />
+                                            <button className=" py-1 px-2 ">
+                                                <img alt="" src={"./assets/search.png"}
+                                                     className="xl:h-7 xl:w-7 h-5 w-5"/>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <img alt="" src={"./assets/heart.png"} className="xl:h-7 xl:w-7 h-5 w-5"/>
+                                        </div>
+                                        <a
+                                            className="cursor-pointer relative"
+                                            href="/e-commerce-website/cart"
+                                        >
+                                            {cartCount > 0 &&
+                                            <div
+                                                style={{backgroundColor: colors.secondary2}}
+                                                className="w-5 h-5 flex text-xs text-white rounded-full absolute -top-2 -right-2 justify-center items-center"
+                                            >
+                                                {cartCount}
+                                            </div>
+                                            }
+                                            <img alt="" src={"./assets/shopping-cart.png"}
+                                                 className="xl:h-7 xl:w-7 h-5 w-5"/>
                                         </a>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <a href="#"
-                                           className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
-                                            Settings
-                                        </a>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <a href="#"
-                                           className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
-                                            Sign out
-                                        </a>
-                                    </MenuItem>
-                                </MenuItems>
-                            </Menu>
+                                        <div
+                                            className="p-1 rounded-full bg-white hover:invert"
+                                        >
+                                            <MenuButton
+                                                className="relative flex rounded-full">
+                                                <span className="absolute -inset-1.5"/>
+                                                <span className="sr-only">Open user menu</span>
+                                                <img
+                                                    alt=""
+                                                    src={"./assets/user.png"}
+                                                    className="xl:h-6 xl:w-6 h-5 w-5 rounded-full invert"
+                                                />
+                                            </MenuButton>
+                                        </div>
+                                        <MenuItems
+                                            transition
+                                            className="absolute top-0 right-0 z-10 mt-8 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                                        >
+                                            <MenuItem>
+                                                <a href="#"
+                                                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                                                    Your Profile
+                                                </a>
+                                            </MenuItem>
+                                            <MenuItem>
+                                                <a href="#"
+                                                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                                                    Settings
+                                                </a>
+                                            </MenuItem>
+                                            <MenuItem>
+                                                <a
+                                                   onClick={signOut}
+                                                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                                                    Sign out
+                                                </a>
+                                            </MenuItem>
+                                        </MenuItems>
+
+                                    </Menu>
+                                    :
+                                    <a
+                                        key= "SignUp"
+                                        href="/e-commerce-website/signup"
+                                        className={classNames(
+                                            'xl:text-lg text-sm px-2 py-2 font-medium',
+                                            'text-gray-500 hover:underline hover:text-black',
+                                        )}
+                                    >
+                                        Sign Up
+                                    </a>
+                            }
+
+
                         </div>
                     </div>
                     <hr className="border-t border-gray-200"/>
@@ -141,3 +194,4 @@ export function Header() {
         </>
     )
 }
+

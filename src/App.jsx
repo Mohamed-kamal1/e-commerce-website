@@ -1,75 +1,36 @@
 import './App.css'
-import {Header} from "./components/Header.jsx";
 import {Login} from "./Register/Login.jsx";
+import {Header} from "./components/Header.jsx";
 import {Footer} from "./components/Footer.jsx";
-import {Card, CardDetails, CardImage, CardName, Price, Rate} from "./components/Card.jsx";
-import {Section, SectionHeader ,CardsContainer} from "./components/Section.jsx";
-import {useRef} from "react";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Home} from "./Pages/Home.jsx";
+import {Signup} from "./Register/Signup.jsx";
+import {Cart} from "./Pages/Cart.jsx";
+import {Checkout} from "./Pages/Checkout.jsx";
+import {Error} from "./Pages/Error.jsx";
 
 function App() {
-    const containerRef = useRef(null);
-
     return (
-            <>
-                    <Header/>
-                    <Login/>
+        <>
+            <div>
+                <BrowserRouter>
+                    <Header />
+                    <Routes>
+                        <Route  path="e-commerce-website/Home" element={<Home />} />
+                        <Route  path="e-commerce-website/login" element={<Login />} />
+                        <Route  path="e-commerce-website/" element={<Signup />} />
+                        <Route  path="e-commerce-website/signup" element={<Signup />} />
+                        <Route  path="e-commerce-website/cart" element={<Cart />} />
+                        <Route  path="e-commerce-website/checkout" element={<Checkout />} />
+                        <Route  path="*" element={<Error/>} />
+
+                    </Routes>
                     <Footer/>
-                <Section>
-                    <SectionHeader tag={"Category"} title={"Top Selling Products"} viewAll={false}  Ref={containerRef}/>
-                    <CardsContainer Ref={containerRef}>
-                        <Card>
-                            <CardImage src={"assets/image1.png"}/>
-                            <CardDetails>
-                                <CardName name={"Product 1"}/>
-                                <Price price={"$100"} oldPrice={"$150"}/>
-                                <Rate stars={4} rate={200}/>
-                            </CardDetails>
-                        </Card>
-                        <Card>
-                            <CardImage src={"assets/image1.png"}/>
-                            <CardDetails>
-                                <CardName name={"Product 2"}/>
-                                <Price price={"$200"} oldPrice={"$250"}/>
-                                <Rate stars={3} rate={100}/>
-                            </CardDetails>
-                        </Card>
-                        <Card>
-                            <CardImage src={"assets/image1.png"}/>
-                            <CardDetails>
-                                <CardName name={"Product 3"}/>
-                                <Price price={"$300"} oldPrice={"$350"}/>
-                                <Rate stars={5} rate={500}/>
-                            </CardDetails>
-                        </Card>
-                        <Card>
-                            <CardImage src={"assets/image1.png"}/>
-                            <CardDetails>
-                                <CardName name={"Product 4"}/>
-                                <Price price={"$400"} oldPrice={"$450"}/>
-                                <Rate stars={2} rate={50}/>
-                            </CardDetails>
-                        </Card>
-                        <Card>
-                            <CardImage src={"assets/image1.png"}/>
-                            <CardDetails>
-                                <CardName name={"Product 4"}/>
-                                <Price price={"$400"} oldPrice={"$450"}/>
-                                <Rate stars={2} rate={50}/>
-                            </CardDetails>
-                        </Card> <Card>
-                        <CardImage src={"assets/image1.png"}/>
-                        <CardDetails>
-                            <CardName name={"Product 4"}/>
-                            <Price price={"$400"} oldPrice={"$450"}/>
-                            <Rate stars={2} rate={50}/>
-                        </CardDetails>
-                    </Card>
+                </BrowserRouter>
+            </div>
 
-                    </CardsContainer>
-
-                </Section>
-            </>
-        )
+        </>
+    )
 }
 
 export default App

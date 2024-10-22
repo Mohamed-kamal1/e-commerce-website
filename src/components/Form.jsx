@@ -2,31 +2,20 @@ import  {useState} from "react";
 import PropTypes from "prop-types";
 import {colors} from "../style.js";
 function Form(props) {
-    const [formValid, setFormValid] = useState(true);
+    const [formValid] = useState(true);
 
-    function validateLogin(event) {
-
-        event.preventDefault();
-        const form = event.target;
-        if (form.checkValidity() === false) {
-            setFormValid(false);
-            event.stopPropagation();
-        } else {
-            setFormValid(true);
-            console.log("Form is valid, submitting...");
-        }
-    }
 
     return (
 
             <form
                 style={{
                 }}
-                className={props.className +" needs-validation flex flex-col gap-5"}
-                id="login-form"
-                name="login-form"
+                className={props.className +" needs-validation flex flex-col gap-2"}
                 noValidate
-                onSubmit={validateLogin}
+                onSubmit={() => {
+                    props.onSubmit(event);
+                }
+            }
                 action={"submit"}
             >
                 {props.children}
@@ -54,10 +43,11 @@ function Input(props) {
                     type={props.type}
                     id={props.id}
                     name={props.name}
-                    className={props.className + " peer block flex-1 rounded py-3 pl-2 text-gray-900 placeholder:text-gray-400 focus:ring-0 text-lg "}
+                    className={props.className + " peer block flex-1  py-3 pl-2 text-gray-900 placeholder:text-gray-400 focus:ring-0 text-lg "}
                     placeholder={props.placeholder}
                     required={props.required}
                     formNoValidate={true}
+                    onChange={props.onChange}
                 />
                 {/*display none*/}
                 <p className="hidden peer-invalid:block text-red-700 font-light">
@@ -78,11 +68,13 @@ Input.propTypes = {
     className: PropTypes.string,
     placeholder: PropTypes.string,
     required: PropTypes.bool,
-    errorMessage: PropTypes.string
+    errorMessage: PropTypes.string,
+    onChange: PropTypes.func
 };
 Form.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    onSubmit: PropTypes.func
 };
 
 

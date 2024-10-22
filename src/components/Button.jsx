@@ -2,6 +2,7 @@ import PropTypes  from 'prop-types';
 import {colors} from "../style.js";
 
 
+
 function Button(props) {
     return (
         <>
@@ -11,6 +12,7 @@ function Button(props) {
                     flexDirection: 'column',
                     gap: '10px',
                     width: props.width,
+                    cursor: 'pointer',
                 }}
             >
                 <button
@@ -20,10 +22,12 @@ function Button(props) {
                         color: props.color,
                     }}
                     className={props.className+ " p-3 border-0 rounded"}
+                    onClick={props.onClick}
                     onMouseOver={
                         (e) => {
-                            e.target.style.backgroundColor = colors.button2Hover;
+                            e.target.style.backgroundColor = props.hoverColor || colors.button2Hover;
                             e.target.style.color = colors.text2;
+
                         }
                     }
                     onMouseOut={
@@ -45,10 +49,12 @@ Button.propTypes = {
     width: PropTypes.string,
     height: PropTypes.string,
     color: PropTypes.string,
+    hoverColor: PropTypes.string,
     BackgroundColor: PropTypes.string,
-    children: PropTypes.string,
+    children: PropTypes.node,
     className: PropTypes.string,
     type: PropTypes.oneOf(['submit', 'button', 'reset']),
+    onClick: PropTypes.func,
 };
 
 
